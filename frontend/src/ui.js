@@ -10,6 +10,11 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+import { BooleanNode } from './nodes/booleanNode';
+import { DateNode } from './nodes/dateNode';
+import { ImageNode } from './nodes/imageNode';
+import { MathNode } from './nodes/mathNode';
+import { CustomNode } from './nodes/customNode';
 
 import 'reactflow/dist/style.css';
 
@@ -20,6 +25,11 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  boolean: BooleanNode,
+  date: DateNode,
+  image: ImageNode,
+  math: MathNode,
+  custom: CustomNode,
 };
 
 const selector = (state) => ({
@@ -80,7 +90,7 @@ export const PipelineUI = () => {
             addNode(newNode);
           }
         },
-        [reactFlowInstance]
+        [reactFlowInstance, addNode, getNodeID]
     );
 
     const onDragOver = useCallback((event) => {

@@ -12,6 +12,7 @@ export const BaseNode = ({ title, handles = [], children, style = {} }) => {
   return (
     <div
       style={{
+        position: 'relative',
         width: 240,
         minHeight: 110,
         border: '1.5px solid #2563eb',

@@ -43,12 +43,14 @@ export const TextNode = ({ id, data }) => {
   }, [currText]);
 
   // Handles for variables (left) and output (right)
+  const TOP_OFFSET = 50; // Increased to account for title + padding
+  const HANDLE_SPACING = 24;
   const handles = [
     ...variables.map((v, i) => ({
       type: "target",
       position: Position.Left,
       id: `${id}-${v}`,
-      style: { top: 50 + i * 24 },
+      style: { top: TOP_OFFSET + i * HANDLE_SPACING }, // Removed position: absolute
     })),
     {
       type: "source",
@@ -61,7 +63,13 @@ export const TextNode = ({ id, data }) => {
     <BaseNode
       title="Text"
       handles={handles}
-      style={{ minHeight: 110 + variables.length * 24, width: NODE_WIDTH }}
+      style={{
+        minHeight: Math.max(
+          110,
+          TOP_OFFSET + variables.length * HANDLE_SPACING + 30
+        ),
+        width: NODE_WIDTH,
+      }}
     >
       <label>
         Text:
@@ -82,7 +90,7 @@ export const TextNode = ({ id, data }) => {
         />
       </label>
       {variables.length > 0 && (
-        <div style={{ fontSize: 12, color: "#666" }}>
+        <div style={{ fontSize: 12, color: "#666", marginTop: 8 }}>
           Variables: {variables.map((v) => `{{${v}}}`).join(", ")}
         </div>
       )}
